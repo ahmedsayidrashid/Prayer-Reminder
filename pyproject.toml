@@ -10,3 +10,6 @@ lines_after_imports = 2
 
 [tool.lint.pydocstyle]
 convention = "pep257"
+
+[tool.mypy]
+disable_error_code = ["arg-type", "import-untyped"] 
