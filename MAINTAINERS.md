@@ -22,6 +22,8 @@ curl -s 'https://api.aladhan.com/v1/timingsByAddress/DD-MM-YYYY?address=Canada,O
 
 To install this tool on your distribution, reference your package manager, for me I use Ubuntu, therefore `sudo apt install jq` works fine.
 
+Reference [calculation-methods](https://aladhan.com/calculation-methods) for prayer times calculation methods
+
 ## Connecting to a PI
 
 Now that I've got a pretty basic setup to get the prayer times, we will integrate our PI 5 into the project
