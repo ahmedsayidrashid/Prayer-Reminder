@@ -1,13 +1,12 @@
 # Ignore all virtual environment files
 __pycache__/
-bin/
-include/
-lib/
-lib64/
-pyvenv.cfg
+venv/
 
 # Ignore all shell script files
 *.sh
 
 # ignore poetry lock file
 poetry.lock
+
+# Ignore pyproject for now since I get issues 
+pyproject.toml
