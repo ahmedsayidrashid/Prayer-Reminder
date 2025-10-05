@@ -43,24 +43,38 @@ def bring_gpio_high(pin_number: int) -> None:
     :param pin_number: GPIO pin number to bring high
     :return: None
     """
+    print(f"Bringing GPIO {pin_number} high.")
     GPIO.setup(pin_number, GPIO.OUT)
     GPIO.output(pin_number, GPIO.HIGH)
+
+
+def ack_prayer_time(pin_number: int) -> None:
+    """
+    This method waits for the user button to be pressed to bring the GPIO pin low.
+    :param pin_number: GPIO pin number to bring low
+    :return: None
+    """
     while True:
         time.sleep(1)
-        if GPIO.input(USER_BUTTON_GPIO_PIN) == GPIO.LOW:  # Button pressed
+        if GPIO.input(pin_number) == GPIO.LOW:  # Button pressed
             print("Button pressed, bringing GPIO low and exiting...")
-            GPIO.output(pin_number, GPIO.LOW)
+            GPIO.output(22, GPIO.LOW)
             break
         else:
             print("Waiting for button press to bring GPIO low...")
 
 
 if __name__ == "__main__":
-    message = put_all_together()
-    if message:
-        print("Bringing GPIO 17 high")
-        bring_gpio_high(17)
-    write_to_lcd(message)
-    GPIO.cleanup()
-    # Clean up GPIO settings
-    lcd.close()  # Close the LCD when done
+    try:
+        message = put_all_together()
+        if message:
+            bring_gpio_high(22)
+            ack_prayer_time(USER_BUTTON_GPIO_PIN)
+        write_to_lcd(message)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        GPIO.cleanup()
+        # Clean up GPIO settings
+        lcd.close()  # Close the LCD when done
