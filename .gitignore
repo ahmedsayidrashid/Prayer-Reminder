@@ -1,0 +1,10 @@
+# Ignore all virtual environment files
+__pycache__/
+bin/
+include/
+lib/
+lib64/
+pyvenv.cfg
+
+# Ignore all shell script files
+*.sh
