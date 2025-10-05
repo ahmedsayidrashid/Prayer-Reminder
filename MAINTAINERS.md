@@ -2,10 +2,6 @@
 
 ## Prayer API Usage
 
-This guide provides instructions for maintainers and developers on how to use the Adhan (Prayer Times) API and more.
-
-## Notes on the API
-
 To get familiar with the API, I am using `curl` to get raw HTTP response from the endpoint.
 
 For example, if I want to get the prayer times for today, I'd use the following curl command.
@@ -14,14 +10,14 @@ For example, if I want to get the prayer times for today, I'd use the following 
 curl -s 'https://api.aladhan.com/v1/timingsByAddress/DD-MM-YYYY?address=Canada,Ottowa&method=3'
 ```
 
-`-s` option is to silent the unnecessary (but cool) loading bar.
+The `-s` option is to silent the unnecessary (but cool) loading bar.
 
-The command above gets the prayer time for the given day, for example 04-10-2025 will return the prayer times for October 4th, 2025 in Ottawa, Canada using the Muslim World League prayer time calculation method (standard).
+The command above gets the prayer time for the given day, for example `04-10-2025` will return the prayer times for October 4th, 2025 in Ottawa, Canada using the Muslim World League prayer time calculation method (standard).
 
 Since the response is a JSON message that's poorly formatted, I pipe the result of this command to a JSON formatter via `jq`
 
 ```sh
-curl -s 'https://api.aladhan.com/v1/timingsByAddress/DD-MM-YYYY?address=Canada,Ottowa&method=1' | jq
+curl -s 'https://api.aladhan.com/v1/timingsByAddress/DD-MM-YYYY?address=Canada,Ottowa&method=3' | jq
 ```
 
 To install this tool on your distribution, reference your package manager, for me I use Ubuntu, therefore `sudo apt install jq` works fine.
