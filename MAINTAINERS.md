@@ -21,7 +21,17 @@ The command above gets the prayer time for the given day, for example 04-10-2025
 Since the response is a JSON message that's poorly formatted, I pipe the result of this command to a JSON formatter via `jq`
 
 ```sh
-curl -s 'https://api.aladhan.com/v1/timingsByAddress/04-10-2025?address=Canada,Ottowa&method=1' | jq
+curl -s 'https://api.aladhan.com/v1/timingsByAddress/DD-MM-YYYY?address=Canada,Ottowa&method=1' | jq
 ```
 
 To install this tool on your distribution, reference your package manager, for me I use Ubuntu, therefore `sudo apt install jq` works fine.
+
+## Connecting to a PI
+
+Now that I've got a pretty basic setup to get the prayer times, we will integrate our PI 5 into the project
+
+Instead of using a external display to find the IP of the PI, `nmap` is a good option to find the IP of the PI and to scan for devices on your network.
+
+However, because I use a TP-Link range extender to get better WIFI access in my room, I can simply use the app to get the IP of the PI.
+
+Given the the IP of the PI, install the necessary extension to develop via SSH on Vscode.
