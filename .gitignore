@@ -7,6 +7,3 @@ venv/
 
 # ignore poetry lock file
 poetry.lock
-
-# Ignore pyproject for now since I get issues 
-pyproject.toml
