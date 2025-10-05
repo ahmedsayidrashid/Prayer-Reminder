@@ -3,7 +3,7 @@ __pycache__/
 venv/
 
 # Ignore all shell script files
-*.sh
+run.sh
 
 # ignore poetry lock file
 poetry.lock
