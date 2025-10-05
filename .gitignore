@@ -8,3 +8,6 @@ pyvenv.cfg
 
 # Ignore all shell script files
 *.sh
+
+# ignore poetry lock file
+poetry.lock
