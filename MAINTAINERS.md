@@ -35,3 +35,15 @@ Instead of using a external display to find the IP of the PI, `nmap` is a good o
 However, because I use a TP-Link range extender to get better WIFI access in my room, I can simply use the app to get the IP of the PI.
 
 Given the the IP of the PI, install the necessary extension to develop via SSH on Vscode.
+
+## Dependencies
+
+To install all the dependencies of this 'package' (will be one soon eventually), run the following command.
+
+```sh
+pip install -r requirements.txt
+```
+
+The command above will install all the dependencies listed in `requirements.txt`.
+
+Note that developers should keep the file updated by piping the result of `pip list --format=freeze` into the file.
