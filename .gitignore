@@ -1,12 +1,9 @@
-# Ignore all virtual environment files
+# Ignore virtual environment and cached files
 __pycache__/
 venv/
 
-# Ignore all shell script files
+# Ignore the run script
 run.sh
 
-# ignore poetry lock file
-poetry.lock
-
-# ignore env files
+# ignore local env files
 .env
