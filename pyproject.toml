@@ -1,15 +1,20 @@
+# This file is used to configure various tools for the project.
+
+# configure the formatter to use a line length of 120 characters
 [tool.black]
 line-length = 120
 
+# ensure each import is on a separate line
+# and add two lines after imports for readability
 [tool.isort]
 profile = "black"
 force_single_line = true
 lines_after_imports = 2
 
-## [tool.ruff]
-
+# configure the linter (ruff) to enforce a certain docstring style
 [tool.lint.pydocstyle]
 convention = "pep257"
 
+# ignore the following error codes (annoying ones due to external libraries for PI interaction)
 [tool.mypy]
 disable_error_code = ["arg-type", "import-untyped"] 
