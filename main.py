@@ -13,6 +13,7 @@ from defs import PRAYER_TIMES
 from defs import URL
 
 
+# Load environment variables from .env file (or system environment)
 load_dotenv()
 
 global current_date, current_time
@@ -63,7 +64,7 @@ def get_prayer_times(prayer_data: dict) -> dict | None:
     Extract prayer times from the dictionary.
 
     :param prayer_data: Dictionary containing the API response
-    :return: Dictionary of prayer times for the specified date or None if not found
+    :return: Dictionary of prayer times for the specified prayers (Fajr, Dhuhr, Asr, Maghrib, Isha) or None if data is invalid
     """
     if prayer_data and "data" in prayer_data:
         timings = prayer_data["data"].get("timings", {})
@@ -104,7 +105,6 @@ def put_all_together() -> str:
     current_prayer_times = get_prayer_times(prayer_data)
     prayer_to_pray_now = check_if_prayer_time(current_time, current_prayer_times)
     if prayer_to_pray_now:
-        # Pretty print the JSON response
         message = f"Time to pray: {prayer_to_pray_now}"
     else:
         message = f"Noting to pray at {current_time}"

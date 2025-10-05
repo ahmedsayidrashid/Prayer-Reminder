@@ -18,6 +18,7 @@ lcd = CharLCD(i2c_expander="PCF8574", address=0x27, port=1, cols=16, rows=2, cha
 USER_BUTTON_GPIO_PIN = 27  # GPIO pin number for the user button
 
 GPIO.setmode(GPIO.BCM)
+
 # Use GPIO USER_BUTTON_GPIO_PIN for the button input
 GPIO.setup(USER_BUTTON_GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -27,12 +28,11 @@ def write_to_lcd(message: str, display_time: int = 5) -> None:
     This method writes a message to the LCD display for the specified display time (default is 5).
 
     :param message: Message to display on the LCD
-    :param display_time: Time in seconds to display the message
+    :param display_time: Time in seconds to display the message (default is 5)
     :return: None
     """
     lcd.clear()
     lcd.write_string(message)
-    # display the message for 5 seconds
     time.sleep(display_time)
     lcd.clear()
 
