@@ -1,7 +1,10 @@
 # Get today's date in DD-MM-YYYY format to pass in as a parameter
+
+import os
 from datetime import datetime
 
 import requests
+from dotenv import load_dotenv
 
 from defs import ADDRESS
 from defs import DATE
@@ -10,12 +13,14 @@ from defs import PRAYER_TIMES
 from defs import URL
 
 
+load_dotenv()
+
 global current_date, current_time
 
 current_date = datetime.now().strftime("%d-%m-%Y")
 
 # Get the current time in HH:MM format
-current_time = "05:29"  # datetime.now().strftime("%H:%M")
+current_time = os.getenv("CURRENT_TIME", datetime.now().strftime("%H:%M"))
 
 
 def fetch_prayer_times(address=ADDRESS, date=DATE, method=METHOD, url=URL) -> dict | None:
