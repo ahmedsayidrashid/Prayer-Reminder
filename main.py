@@ -1,4 +1,5 @@
-import json
+# Get today's date in DD-MM-YYYY format to pass in as a parameter
+from datetime import datetime
 
 import requests
 
@@ -9,7 +10,15 @@ from defs import PRAYER_TIMES
 from defs import URL
 
 
-def fetch_prayer_times(address=ADDRESS, date=DATE, method=METHOD, url=URL) -> dict:
+global current_date, current_time
+
+current_date = datetime.now().strftime("%d-%m-%Y")
+
+# Get the current time in HH:MM format
+current_time = "05:29"  # datetime.now().strftime("%H:%M")
+
+
+def fetch_prayer_times(address=ADDRESS, date=DATE, method=METHOD, url=URL) -> dict | None:
     """
     Fetch prayer times from the Aladhan API for a specific address and method.
 
@@ -24,7 +33,7 @@ def fetch_prayer_times(address=ADDRESS, date=DATE, method=METHOD, url=URL) -> di
     params = {"address": ADDRESS, "method": METHOD}
 
     # append the date to the URL
-    url = f"{url}{date}"
+    url = f"{url}{current_date}"
 
     try:
         # Make the GET request
@@ -44,7 +53,7 @@ def fetch_prayer_times(address=ADDRESS, date=DATE, method=METHOD, url=URL) -> di
         return None
 
 
-def get_prayer_times_for_date(prayer_data: dict) -> dict:
+def get_prayer_times(prayer_data: dict) -> dict | None:
     """
     Extract prayer times from the dictionary.
 
@@ -67,11 +76,37 @@ def get_prayer_times_for_date(prayer_data: dict) -> dict:
         return None
 
 
-if __name__ == "__main__":
+def check_if_prayer_time(time, prayer_times) -> str | None:
+    """
+    Check if the current time matches any prayer time.
+
+    :param current_time: Current time in 'HH:MM' format
+    :param prayer_times: Dictionary of prayer times
+    :return: Name of the prayer if it's time, else None
+    """
+    for prayer, time in prayer_times.items():
+        if time == current_time:
+            return prayer
+    return None
+
+
+def put_all_together() -> str:
+    """
+    Fetch prayer times, check if it's time for any prayer, and print the result.
+    """
+    message = ""
     prayer_data = fetch_prayer_times()
-    current_prayer_times = get_prayer_times_for_date(prayer_data)
-    if prayer_data:
+    current_prayer_times = get_prayer_times(prayer_data)
+    prayer_to_pray_now = check_if_prayer_time(current_time, current_prayer_times)
+    if prayer_to_pray_now:
         # Pretty print the JSON response
-        print(json.dumps(current_prayer_times, indent=2))
+        message = f"Time to pray: {prayer_to_pray_now}"
     else:
-        print("Failed to fetch prayer times.")
+        message = f"Noting to pray at {current_time}"
+
+    print(message)
+    return message
+
+
+if __name__ == "__main__":
+    put_all_together()
